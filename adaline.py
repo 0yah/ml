@@ -17,9 +17,9 @@ The output of the activation function which is net input is compared with 0 and 
 
 class Adaline(object):
 
-    def __init__(self, n_iterations=100, random_state=1, learning_rate=0.01):
+    def __init__(self, number_of_iterations=100, random_state=1, learning_rate=0.01):
 
-        self.n_iterations = n_iterations
+        self.number_of_iterations = number_of_iterations
         self.random_state = random_state
         self.learning_rate = learning_rate
 
@@ -39,7 +39,7 @@ class Adaline(object):
     def fit(self, X_train, Y_train):
         rgen = np.random.RandomState(self.random_state)
         self.weight = rgen.normal(loc=0.0, scale=0.01, size=1 + X_train.shape[1])
-        for _ in range(self.n_iterations):
+        for _ in range(self.number_of_iterations):
 
             activation_function_output = self.activation_function(self.net_input(X_train))
 
@@ -94,13 +94,13 @@ class Adaline(object):
 
     """
 
-    def predict(self, X):
+    def predict(self, x_test):
         """
 
         if output > 0:
 
         """
-        return np.where(self.activation_function(self.net_input(X)) >= 0.0, 1, 0)
+        return np.where(self.activation_function(self.net_input(x_test)) >= 0.0, 1, 0)
 
     '''
 

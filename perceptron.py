@@ -3,31 +3,31 @@ from numpy.lib.function_base import select
 
 class Perceptron:
 
-    def __init__(self,learning_rate=0.01,n_iters=1000):
-        self.lr = learning_rate
-        self.n_iters = n_iters
-        self.activation_function = self._unit_step_func
+    def __init__(self,learning_rate=0.01,number_of_iterations=1000):
+        self.learning_rate = learning_rate
+        self.number_of_iterations = number_of_iterations
+        self.activation_function = self.unit_step_function
         self.weights = None
         self.bias = None
 
     # X Training samples
-    # Y Traning Lables
-    def fit(self,X,y):
-        n_samples,n_features = X.shape
+    # y_train Traning Lables
+    def fit(self,x_train,y_train):
+        n_samples,n_features = x_train.shape
 
         #init weights
         #For each sample we add a number of features
         self.weights = np.zeros(n_features)
         self.bias = 0
-        y_ = np.array([1 if i >0 else 0 for i in y])
+        y_ = np.array([1 if i >0 else 0 for i in y_train])
 
         #For the number of iterations defined
-        for _ in range(self.n_iters):
-            for index,x_i in enumerate(X):
+        for _ in range(self.number_of_iterations):
+            for index,x_i in enumerate(x_train):
                 linear_output = np.dot(x_i,self.weights) + self.bias
                 y_predicted = self.activation_function(linear_output)
 
-                update = self.lr = (y_[index] - y_predicted)
+                update = self.learning_rate = (y_[index] - y_predicted)
                 self.weights += update * x_i
                 self.bias += update
 
@@ -41,5 +41,5 @@ class Perceptron:
         return y_predicted
 
 
-    def _unit_step_func(self,x):
+    def unit_step_function(self,x):
         return np.where(x >= 0,1,0)
