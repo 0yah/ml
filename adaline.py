@@ -97,7 +97,10 @@ class Adaline(object):
     def predict(self, x_test):
         """
 
-        if output > 0:
+        if output >= 0.0:
+            return 1
+        else:
+            return 0
 
         """
         return np.where(self.activation_function(self.net_input(x_test)) >= 0.0, 1, 0)
@@ -108,12 +111,15 @@ class Adaline(object):
 
     '''
 
-    def score(self, X, y):
+    def score(self, x_test, y_test):
         misclassified_data_count = 0
-        for xi, target in zip(X, y):
-            output = self.predict(xi)
-            if(target != output):
+        for x_test_input, target_output in zip(x_test, y_test):
+            
+            #Try with the test dataset
+            produced_output = self.predict(x_test_input)
+            if(target_output != produced_output):
                 misclassified_data_count += 1
-        total_data_count = len(X)
-        self.score_ = (total_data_count - misclassified_data_count) / total_data_count
-        return self.score_
+        total_data_count = len(x_test)
+        self.accuracy = (total_data_count - misclassified_data_count) / total_data_count
+        #Return accuracy as a percentage 
+        return self.accuracy

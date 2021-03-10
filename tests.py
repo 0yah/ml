@@ -31,7 +31,7 @@ X - Input
 y - Output
 """
 
-
+print(np.arange(1,25))
 x = np.arange(1,25).reshape(12,2)
 y = np.array([0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0])
 print(x,y)
