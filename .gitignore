@@ -4,3 +4,5 @@
 /Scripts
 /Essays
 *.cfg
+*.json
+/.vscode
